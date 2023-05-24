@@ -37,14 +37,14 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('chat', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chatDRF.chat')),
-                ('receiver', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='received_messages', to='chatDRF.user')),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sent_messages', to='chatDRF.user')),
+                ('chat', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chatApi.chat')),
+                ('receiver', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='received_messages', to='chatApi.user')),
+                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sent_messages', to='chatApi.user')),
             ],
         ),
         migrations.AddField(
             model_name='chat',
             name='members',
-            field=models.ManyToManyField(to='chatDRF.user'),
+            field=models.ManyToManyField(to='chatApi.user'),
         ),
     ]

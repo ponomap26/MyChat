@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ChatapiConfig(AppConfig):
+class AccountsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'chatDRF'
+    name = 'accounts'

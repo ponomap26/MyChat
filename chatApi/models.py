@@ -1,28 +1,26 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Создание моделей.
 from django.db.models.fields import related
 
 
-class User(models.Model):
-    username = models.CharField(max_length=30)
-    def __str__(self):
-        return self.username
+
 
 
 """Модель пользователя."""
 
 
 class UserProfile(models.Model):
-    nic = models.ManyToManyField(User, max_length=30)
+    user = models.OneToOneField(User, max_length=30, related_name='profile', on_delete=models.CASCADE)
     password = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    code = models.CharField(max_length=10, blank=True, null=True, default=None)
+    code = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.username
+        return self.user
 
 
 """Модель чата."""
@@ -30,7 +28,7 @@ class UserProfile(models.Model):
 
 class Chat(models.Model):
     name = models.CharField(max_length=30)
-    members = models.ManyToManyField(User)
+    members = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
